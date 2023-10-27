@@ -46,7 +46,7 @@ public class TutorialController {
   }
 
   @GetMapping("/tutorials/{id}")
-  public ResponseEntity<Tutorial> getTutorialById(@PathVariable("id") long id) {
+  public ResponseEntity<Tutorial> getTutorialById(@PathVariable("id") String id) {
     Tutorial tutorial = tutorialRepository.findById(id)
         .orElseThrow(() -> new ResourceNotFoundException("Not found Tutorial with id = " + id));
 
@@ -60,7 +60,7 @@ public class TutorialController {
   }
 
   @PutMapping("/tutorials/{id}")
-  public ResponseEntity<Tutorial> updateTutorial(@PathVariable("id") long id, @RequestBody Tutorial tutorial) {
+  public ResponseEntity<Tutorial> updateTutorial(@PathVariable("id") String id, @RequestBody Tutorial tutorial) {
     Tutorial _tutorial = tutorialRepository.findById(id)
         .orElseThrow(() -> new ResourceNotFoundException("Not found Tutorial with id = " + id));
 
@@ -72,7 +72,7 @@ public class TutorialController {
   }
 
   @DeleteMapping("/tutorials/{id}")
-  public ResponseEntity<HttpStatus> deleteTutorial(@PathVariable("id") long id) {
+  public ResponseEntity<HttpStatus> deleteTutorial(@PathVariable("id") String id) {
     tutorialRepository.deleteById(id);
     
     return new ResponseEntity<>(HttpStatus.NO_CONTENT);

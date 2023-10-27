@@ -10,6 +10,7 @@ import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
@@ -19,8 +20,9 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 @Table(name = "comments")
 public class Comment {
   @Id
-  @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "comment_generator")
-  private Long id;
+  @GenericGenerator(name = "comment_generator", strategy = "com.jpaspring.hibernate.onetomany.generators.CommentIdGenerator")
+  @GeneratedValue(generator = "comment_generator")
+  private String id;
 
   @Lob
   private String content;
@@ -32,7 +34,7 @@ public class Comment {
   @JsonIgnore
   private Tutorial tutorial;
 
-  public Long getId() {
+  public String getId() {
     return id;
   }
 

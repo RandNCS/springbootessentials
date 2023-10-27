@@ -8,9 +8,9 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.jpaspring.hibernate.onetomany.model.Comment;
 
-public interface CommentRepository extends JpaRepository<Comment, Long> {
-  List<Comment> findByTutorialId(Long postId);
+public interface CommentRepository extends JpaRepository<Comment, String> {
+  List<Comment> findByTutorialId(String postId);
   
   @Transactional
-  void deleteByTutorialId(long tutorialId);
+  void deleteByTutorialId(String tutorialId);
 }
