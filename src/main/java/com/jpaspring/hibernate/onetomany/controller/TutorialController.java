@@ -21,17 +21,24 @@ import com.jpaspring.hibernate.onetomany.exception.ResourceNotFoundException;
 import com.jpaspring.hibernate.onetomany.model.Tutorial;
 import com.jpaspring.hibernate.onetomany.repository.TutorialRepository;
 
-@CrossOrigin(origins = "http://localhost:8081")
+/**
+ * 
+ * Author: Randjith
+ * Created on: 27 Oct 2023 
+ * 
+ * Project: spring-boot-one-to-many
+ */
+@CrossOrigin(origins="http://localhost:8081")
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/")
 public class TutorialController {
 
 	@Autowired
 	TutorialRepository tutorialRepository;
 
-	@GetMapping("/tutorials")
-	public ResponseEntity<List<Tutorial>> getAllTutorials(@RequestParam(required = false) String title) {
-		List<Tutorial> tutorials = new ArrayList<Tutorial>();
+	@GetMapping(path="tutorials", produces={"application/json"})
+	public ResponseEntity<List<Tutorial>> getAllTutorials(@RequestParam(required=false) String title) {
+		List<Tutorial> tutorials=new ArrayList<Tutorial>();
 
 		if (title == null)
 			tutorialRepository.findAll().forEach(tutorials::add);
@@ -45,25 +52,25 @@ public class TutorialController {
 		return new ResponseEntity<>(tutorials, HttpStatus.OK);
 	}
 
-	@GetMapping("/tutorials/{id}")
+	@GetMapping(path="tutorials/{id}", produces={"application/json"})
 	public ResponseEntity<Tutorial> getTutorialById(@PathVariable("id") String id) {
-		Tutorial tutorial = tutorialRepository.findById(id)
-				.orElseThrow(() -> new ResourceNotFoundException("Not found Tutorial with id = " + id));
+		Tutorial tutorial=tutorialRepository.findById(id)
+				.orElseThrow(() -> new ResourceNotFoundException("Not found Tutorial with id=" + id));
 
 		return new ResponseEntity<>(tutorial, HttpStatus.OK);
 	}
 
-	@PostMapping("/tutorials")
+	@PostMapping(path="tutorials", produces={"application/json"})
 	public ResponseEntity<Tutorial> createTutorial(@RequestBody Tutorial tutorial) {
-		Tutorial _tutorial = tutorialRepository
+		Tutorial _tutorial=tutorialRepository
 				.save(new Tutorial(tutorial.getTitle(), tutorial.getDescription(), true));
 		return new ResponseEntity<>(_tutorial, HttpStatus.CREATED);
 	}
 
-	@PutMapping("/tutorials/{id}")
+	@PutMapping(path="tutorials/{id}", produces={"application/json"})
 	public ResponseEntity<Tutorial> updateTutorial(@PathVariable("id") String id, @RequestBody Tutorial tutorial) {
-		Tutorial _tutorial = tutorialRepository.findById(id)
-				.orElseThrow(() -> new ResourceNotFoundException("Not found Tutorial with id = " + id));
+		Tutorial _tutorial=tutorialRepository.findById(id)
+				.orElseThrow(() -> new ResourceNotFoundException("Not found Tutorial with id=" + id));
 
 		_tutorial.setTitle(tutorial.getTitle());
 		_tutorial.setDescription(tutorial.getDescription());
@@ -72,23 +79,23 @@ public class TutorialController {
 		return new ResponseEntity<>(tutorialRepository.save(_tutorial), HttpStatus.OK);
 	}
 
-	@DeleteMapping("/tutorials/{id}")
+	@DeleteMapping(path="tutorials/{id}", produces={"application/json"})
 	public ResponseEntity<HttpStatus> deleteTutorial(@PathVariable("id") String id) {
 		tutorialRepository.deleteById(id);
 
 		return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 	}
 
-	@DeleteMapping("/tutorials")
+	@DeleteMapping(path="tutorials", produces={"application/json"})
 	public ResponseEntity<HttpStatus> deleteAllTutorials() {
 		tutorialRepository.deleteAll();
 
 		return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 	}
 
-	@GetMapping("/tutorials/published")
+	@GetMapping(path="tutorials/published", produces={"application/json"})
 	public ResponseEntity<List<Tutorial>> findByPublished() {
-		List<Tutorial> tutorials = tutorialRepository.findByPublished(true);
+		List<Tutorial> tutorials=tutorialRepository.findByPublished(true);
 
 		if (tutorials.isEmpty()) {
 			return new ResponseEntity<>(HttpStatus.NO_CONTENT);

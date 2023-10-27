@@ -19,15 +19,22 @@ import com.jpaspring.hibernate.onetomany.exception.ResourceNotFoundException;
 import com.jpaspring.hibernate.onetomany.model.Department;
 import com.jpaspring.hibernate.onetomany.repository.DepartmentRepository;
 
+/**
+ * 
+ * Author: Randjith
+ * Created on: 27 Oct 2023 
+ * 
+ * Project: spring-boot-one-to-many
+ */
 @CrossOrigin(origins = "http://localhost:8081")
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/")
 public class DepartmentController {
 
 	@Autowired
 	private DepartmentRepository departmentRepository;
 
-	@GetMapping("/departments")
+	@GetMapping(path="departments", produces = {"application/json"})
 	public ResponseEntity<List<Department>> getAllDepartments() {
 		List<Department> departments = new ArrayList<Department>();
 
@@ -42,7 +49,7 @@ public class DepartmentController {
 		return new ResponseEntity<>(departments, HttpStatus.OK);
 	}
 
-	@GetMapping("/departments/{dep_Id}")
+	@GetMapping(path="departments/{dep_Id}", produces = {"application/json"})
 	public ResponseEntity<Department> getDepartmentById(@PathVariable("dep_Id") String departmentId) {
 		Department department = departmentRepository.findById(departmentId)
 				.orElseThrow(() -> new ResourceNotFoundException("Not found Tutorial with id = " + departmentId));
@@ -50,7 +57,7 @@ public class DepartmentController {
 		return new ResponseEntity<>(department, HttpStatus.OK);
 	}
 
-	@PostMapping("/departments")
+	@PostMapping(path="departments", consumes = {"application/json"}, produces = {"application/json"})
 	public ResponseEntity<Department> createTutorial(@RequestBody Department department) {
 		Department _department = departmentRepository.save(new Department(department.getDepartmentName(),
 				department.getDepEmailAddress(), department.getDepContactNumber()));

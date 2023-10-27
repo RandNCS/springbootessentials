@@ -10,6 +10,12 @@ import org.hibernate.HibernateException;
 import org.hibernate.engine.spi.SharedSessionContractImplementor;
 import org.hibernate.id.IdentifierGenerator;
 
+/**
+ * Author: Randjith
+ * Created on: 27 Oct 2023 
+ * 
+ * Project: spring-boot-one-to-many
+ */
 public class DepartmentIdGenerator implements IdentifierGenerator {
 
 	@Override

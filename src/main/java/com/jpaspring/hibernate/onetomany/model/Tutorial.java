@@ -9,6 +9,12 @@ import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
 
+/**
+ * Author: Randjith
+ * Created on: 27 Oct 2023 
+ * 
+ * Project: spring-boot-one-to-many
+ */
 @Entity
 @Table(name = "tutorials")
 public class Tutorial {
