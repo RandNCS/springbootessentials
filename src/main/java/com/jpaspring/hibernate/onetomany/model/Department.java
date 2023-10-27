@@ -19,9 +19,9 @@ import org.hibernate.annotations.GenericGenerator;
 public class Department {
 
 	@Id
-	@GenericGenerator(name = "sequence_dep_id", strategy = "com.jpaspring.hibernate.onetomany.generators.DepartmentIdGenerator")
-	@GeneratedValue(generator = "sequence_dep_id")
 	@Column(name = "dep_Id", unique = true)
+	@GenericGenerator(name = "department_generator", strategy = "com.jpaspring.hibernate.onetomany.generators.DepartmentIdGenerator")
+	@GeneratedValue(generator = "department_generator")
 	private String depId;
     
 	@Column(name = "dep_name", unique = true)
@@ -43,7 +43,6 @@ public class Department {
 	
 	
 	public Department(String departmentName, String depEmailAddress, String depContactNumber) {
-		super();
 		this.departmentName = departmentName;
 		this.depEmailAddress = depEmailAddress;
 		this.depContactNumber = depContactNumber;

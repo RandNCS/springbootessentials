@@ -21,7 +21,7 @@ public class DepartmentIdGenerator implements IdentifierGenerator {
 		try {
 			Statement statement = connection.createStatement();
 
-			ResultSet rs = statement.executeQuery("select count(dep_Id) as Id from departments");
+			ResultSet rs = statement.executeQuery("select count(dep_Id) as dep_Id from departments");
 
 			if (rs.next()) {
 				int id = rs.getInt(1) + initCounter;
