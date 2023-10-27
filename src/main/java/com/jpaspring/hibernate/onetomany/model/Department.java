@@ -6,23 +6,26 @@ package com.jpaspring.hibernate.onetomany.model;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+
+import org.hibernate.annotations.GenericGenerator;
 
 /**
  * 
  */
 @Entity
-@Table(name = "department")
+@Table(name = "departments")
 public class Department {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY, generator = "department_generator")
+	@GenericGenerator(name = "sequence_dep_id", strategy = "com.jpaspring.hibernate.onetomany.generators.DepartmentIdGenerator")
+	@GeneratedValue(generator = "sequence_dep_id")
+	@Column(name = "dep_Id", unique = true)
 	private String depId;
     
 	@Column(name = "dep_name", unique = true)
-	private String depName;
+	private String departmentName;
 
 	@Column(name = "dep_email_address")
 	private String depEmailAddress;
@@ -33,24 +36,34 @@ public class Department {
 	/**
 	 * 
 	 */
+	
 	public Department() {
 		// TODO Auto-generated constructor stub
+	}
+	
+	
+	public Department(String departmentName, String depEmailAddress, String depContactNumber) {
+		super();
+		this.departmentName = departmentName;
+		this.depEmailAddress = depEmailAddress;
+		this.depContactNumber = depContactNumber;
 	}
 
 	public String getDepId() {
 		return depId;
 	}
 
+
 	public void setDepId(String depId) {
 		this.depId = depId;
 	}
 
-	public String getDepName() {
-		return depName;
+	public String getDepartmentName() {
+		return departmentName;
 	}
 
-	public void setDepName(String depName) {
-		this.depName = depName;
+	public void setDepartmentName(String departmentName) {
+		this.departmentName = departmentName;
 	}
 
 	public String getDepEmailAddress() {
@@ -71,7 +84,7 @@ public class Department {
 
 	@Override
 	public String toString() {
-		return "Department [depId=" + depId + ", depName=" + depName + ", depEmailAddress=" + depEmailAddress
+		return "Department [depId=" + depId + ", departmentName=" + departmentName + ", depEmailAddress=" + depEmailAddress
 				+ ", depContactNumber=" + depContactNumber + "]";
 	}
 }
