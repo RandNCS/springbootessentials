@@ -1,4 +1,4 @@
-# Spring Boot One To Many example with Spring JPA, Hibernate
+# Spring Boot with Spring JPA, Hibernate and MariaDB
 Implement Spring JPA One-To-Many mapping with Hibernate in a Spring Boot CRUD example using @ManyToOne annotation
  
 - configure Spring Data, JPA, Hibernate to work with Database
