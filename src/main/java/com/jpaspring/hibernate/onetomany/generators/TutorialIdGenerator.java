@@ -12,7 +12,7 @@ import org.hibernate.id.IdentifierGenerator;
 
 /**
  * Author: Randjith
- * Created on: 27 Oct 2023 
+ * Created on: 23 Oct 2023 
  * 
  * Project: spring-boot-one-to-many
  */
@@ -26,7 +26,6 @@ public class TutorialIdGenerator implements IdentifierGenerator {
 
 		try {
 			Statement statement = connection.createStatement();
-
 			ResultSet rs = statement.executeQuery("select count(id) as Id from tutorials");
 
 			if (rs.next()) {
@@ -36,10 +35,8 @@ public class TutorialIdGenerator implements IdentifierGenerator {
 				return generatedId;
 			}
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
 		return null;
 	}
 

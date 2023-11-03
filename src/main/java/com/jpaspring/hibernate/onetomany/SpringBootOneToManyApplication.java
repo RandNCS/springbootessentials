@@ -7,11 +7,11 @@ import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfi
 /**
  * 
  * Author: Randjith
- * Created on: 27 Oct 2023 
+ * Created on: 22 Oct 2023 
  * 
  * Project: spring-boot-one-to-many
  */
-@SpringBootApplication(exclude = { SecurityAutoConfiguration.class })
+@SpringBootApplication(/* exclude = { SecurityAutoConfiguration.class } */)
 public class SpringBootOneToManyApplication {
 
   public static void main(String[] args) {

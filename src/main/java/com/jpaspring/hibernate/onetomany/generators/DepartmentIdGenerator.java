@@ -36,7 +36,6 @@ public class DepartmentIdGenerator implements IdentifierGenerator {
 				return generatedId;
 			}
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 

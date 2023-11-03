@@ -35,7 +35,7 @@ public class DepartmentController {
 	private DepartmentRepository departmentRepository;
 
 	@GetMapping(path="departments", produces = {"application/json"})
-	public ResponseEntity<List<Department>> getAllDepartments() {
+	public ResponseEntity<List<Department>> getAllDepartments() throws Exception {
 		List<Department> departments = new ArrayList<Department>();
 
 		departmentRepository.findAll().forEach(departments::add);
@@ -44,8 +44,11 @@ public class DepartmentController {
 		if (departments.isEmpty()) {
 			departments = null;
 			return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-		}
-
+		} 
+		/*
+		 * else if(!departments.isEmpty()) { throw new
+		 * Exception("Intercepted the method execution...."); }
+		 */
 		return new ResponseEntity<>(departments, HttpStatus.OK);
 	}
 
