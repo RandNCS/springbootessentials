@@ -35,11 +35,11 @@ public class DepartmentController {
 	private DepartmentRepository departmentRepository;
 
 	@GetMapping(path="departments", produces = {"application/json"})
-	public ResponseEntity<List<Department>> getAllDepartments() throws Exception {
+	public ResponseEntity<List<Department>> getAllDepartments(@RequestParam(required=false) String title) throws Exception {
 		List<Department> departments = new ArrayList<Department>();
 
 		departmentRepository.findAll().forEach(departments::add);
-		System.out.println(departments);
+		System.out.println("departments: " + departments);
 
 		if (departments.isEmpty()) {
 			departments = null;
